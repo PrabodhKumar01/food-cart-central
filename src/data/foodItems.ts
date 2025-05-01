@@ -41,7 +41,7 @@ export const foodItems: FoodItem[] = [
   {
     id: '5',
     name: 'Burger',
-    description: 'Delicious burger with veggies and sauce',
+    description: 'Delicious burger with caramelized onions and fresh lettuce',
     price: 70,
     quantity: 18,
     image: '/burger.jpg',
