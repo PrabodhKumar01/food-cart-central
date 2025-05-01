@@ -14,8 +14,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // Mock users for demo purposes
 const mockUsers: User[] = [
-  { id: '1', name: 'John Doe', email: 'user@example.com', isAdmin: false },
-  { id: '2', name: 'Admin User', email: 'admin@example.com', isAdmin: true },
+  { id: '1', name: 'John Doe', email: 'user@example.com', password: 'password123', isAdmin: false },
+  { id: '2', name: 'Admin User', email: 'admin@example.com', password: 'admin123', isAdmin: true },
 ];
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -30,13 +30,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = async (email: string, password: string) => {
-    // For demo, we'll just check if the email exists in our mock data
-    // In a real app, you'd verify credentials against a backend
-    const user = mockUsers.find(user => user.email.toLowerCase() === email.toLowerCase());
+    // Check if the email exists and password matches
+    const user = mockUsers.find(
+      user => user.email.toLowerCase() === email.toLowerCase() && user.password === password
+    );
     
     if (user) {
-      setCurrentUser(user);
-      localStorage.setItem('user', JSON.stringify(user));
+      // Create a user object without the password to store in state and localStorage
+      const { password: _, ...userWithoutPassword } = user;
+      setCurrentUser(userWithoutPassword as User);
+      localStorage.setItem('user', JSON.stringify(userWithoutPassword));
       toast.success(`Welcome back, ${user.name}!`);
       return Promise.resolve();
     } else {

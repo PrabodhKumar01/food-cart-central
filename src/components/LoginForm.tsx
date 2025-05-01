@@ -71,8 +71,8 @@ const LoginForm = () => {
           For demo, use:
         </p>
         <p className="text-center text-xs text-muted-foreground">
-          User: user@example.com (any password) <br />
-          Admin: admin@example.com (any password)
+          User: user@example.com / password123 <br />
+          Admin: admin@example.com / admin123
         </p>
       </CardFooter>
     </Card>

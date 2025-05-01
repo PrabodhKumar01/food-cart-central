@@ -1,5 +1,13 @@
 
-export interface FoodItem {
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  password?: string; // Optional because we don't want to include it in all user objects
+  isAdmin: boolean;
+}
+
+export interface CartItem {
   id: string;
   name: string;
   price: number;
@@ -7,22 +15,21 @@ export interface FoodItem {
   image: string;
 }
 
-export interface CartItem extends FoodItem {
-  cartQuantity: number;
-}
-
-export interface User {
+export interface FoodItem {
   id: string;
   name: string;
-  email: string;
-  isAdmin: boolean;
+  description: string;
+  price: number;
+  image: string;
+  category: string;
 }
 
 export interface Order {
   id: string;
   userId: string;
+  userName: string;
   items: CartItem[];
-  total: number;
-  date: string;
+  totalAmount: number;
   status: 'pending' | 'completed' | 'cancelled';
+  createdAt: string;
 }
