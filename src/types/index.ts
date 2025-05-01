@@ -12,16 +12,18 @@ export interface CartItem {
   name: string;
   price: number;
   quantity: number;
+  cartQuantity?: number; // Add this for backward compatibility
   image: string;
 }
 
 export interface FoodItem {
   id: string;
   name: string;
-  description: string;
+  description?: string; // Made optional since it wasn't used in existing data
   price: number;
   image: string;
-  category: string;
+  category?: string; // Made optional since it wasn't used in existing data
+  quantity: number; // Added this to match the existing data
 }
 
 export interface Order {
@@ -30,6 +32,8 @@ export interface Order {
   userName: string;
   items: CartItem[];
   totalAmount: number;
+  total?: number; // For backward compatibility
+  date?: string; // For backward compatibility
   status: 'pending' | 'completed' | 'cancelled';
   createdAt: string;
 }

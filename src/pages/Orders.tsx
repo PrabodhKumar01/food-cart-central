@@ -24,51 +24,49 @@ const Orders = () => {
       {
         id: '1',
         userId: '1',
+        userName: 'John Doe',
         items: [
           {
             id: '1',
             name: 'Sandwich',
             price: 50,
-            quantity: 20,
-            image: '/sandwich.jpg',
-            cartQuantity: 2
+            quantity: 2,
+            image: '/sandwich.jpg'
           },
           {
             id: '3',
             name: 'Light Orange Juice',
             price: 60,
-            quantity: 16,
-            image: '/orange-juice.jpg',
-            cartQuantity: 1
+            quantity: 1,
+            image: '/orange-juice.jpg'
           }
         ],
-        total: 160,
-        date: new Date(2023, 4, 15).toISOString(),
+        totalAmount: 160,
+        createdAt: new Date(2023, 4, 15).toISOString(),
         status: 'completed'
       },
       {
         id: '2',
         userId: '1',
+        userName: 'John Doe',
         items: [
           {
             id: '2',
             name: 'Coffee',
             price: 30,
-            quantity: 25,
-            image: '/coffee.jpg',
-            cartQuantity: 1
+            quantity: 1,
+            image: '/coffee.jpg'
           },
           {
             id: '4',
             name: 'Tea',
             price: 20,
-            quantity: 15,
-            image: '/tea.jpg',
-            cartQuantity: 2
+            quantity: 2,
+            image: '/tea.jpg'
           }
         ],
-        total: 70,
-        date: new Date(2023, 4, 18).toISOString(),
+        totalAmount: 70,
+        createdAt: new Date(2023, 4, 18).toISOString(),
         status: 'pending'
       },
     ];
@@ -114,7 +112,7 @@ const Orders = () => {
                   <div>
                     <CardTitle>Order #{order.id}</CardTitle>
                     <CardDescription>
-                      {format(new Date(order.date), 'PPP')}
+                      {format(new Date(order.createdAt), 'PPP')}
                     </CardDescription>
                   </div>
                   <Badge className={getStatusColor(order.status)}>
@@ -128,11 +126,18 @@ const Orders = () => {
                     <h3 className="font-semibold mb-2">Items</h3>
                     <ul className="space-y-2">
                       {order.items.map((item) => (
-                        <li key={item.id} className="flex justify-between">
-                          <span>
-                            {item.name} x {item.cartQuantity}
-                          </span>
-                          <span>₹{item.price * item.cartQuantity}</span>
+                        <li key={item.id} className="flex justify-between items-center">
+                          <div className="flex items-center gap-2">
+                            <img 
+                              src={item.image} 
+                              alt={item.name} 
+                              className="w-10 h-10 object-cover rounded-md"
+                            />
+                            <span>
+                              {item.name} x {item.quantity}
+                            </span>
+                          </div>
+                          <span>₹{item.price * item.quantity}</span>
                         </li>
                       ))}
                     </ul>
@@ -141,7 +146,7 @@ const Orders = () => {
                   <div className="border-t pt-4">
                     <div className="flex justify-between font-semibold">
                       <span>Total</span>
-                      <span>₹{order.total}</span>
+                      <span>₹{order.totalAmount}</span>
                     </div>
                   </div>
                 </div>
